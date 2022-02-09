@@ -1,0 +1,17 @@
+name = "stats-server"
+type = "webpack"
+
+account_id = ""
+workers_dev = true
+route = ""
+zone_id = ""
+compatibility_date = "2022-02-07"
+
+[[kv_namespaces]]
+binding = "STATSDB"
+preview_id = "9bb6a68d2e2546db88579aa3737e85ba"
+id = "9bb6a68d2e2546db88579aa3737e85ba"
+
+# [secrets]
+# FITBIT_CLIENT_ID
+# FITBIT_CLIENT_SECRET
