@@ -27,7 +27,6 @@ const getAccessToken = async () => {
   let prevTokens = await STATSDB.get('fitbit.tokens');
   prevTokens = JSON.parse(prevTokens);
   const tokens = await refreshAccessToken(prevTokens);
-  console.log(tokens.errors[0]);
   await STATSDB.put('fitbit.tokens', JSON.stringify(tokens));
 
   return tokens.access_token;
