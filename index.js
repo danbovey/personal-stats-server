@@ -17,7 +17,7 @@ const jsonResponse = data =>
   });
 
 router.get('/', () => {
-  return new Response('Stats server');
+  return new Response('Stats server for danbovey.uk');
 });
 
 router.get('/fitbit', async () => {
