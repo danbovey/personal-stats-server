@@ -4,8 +4,17 @@ export const getReadingChallenge = async () => {
   );
   const html = await res.text();
 
-  // const match = /Dan has read (\d+) of (\d+) books/.exec(html);
-  const match = /read (\d+) book toward their goal of (\d+) books/.exec(html);
+  const [
+    _,
+    read,
+    goal
+  ] = /read (\d+) book toward their goal of (\d+) books/.exec(html);
 
-  return { read: Number.parseInt(match[1]), goal: Number.parseInt(match[2]) };
+  const [_m, challengeId] = /user_challenges\/(\d+)/.exec(html);
+
+  return {
+    read: Number.parseInt(read),
+    goal: Number.parseInt(goal),
+    challengeId
+  };
 };
