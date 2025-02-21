@@ -34,8 +34,9 @@ const getAccessToken = async () => {
 
 export const getFitbitSummary = async () => {
   const accessToken = await getAccessToken();
+  const today = new Date().toISOString().split('T')[0];
   const res = await fetch(
-    'https://api.fitbit.com/1/user/-/activities/date/today.json',
+    `https://api.fitbit.com/1/user/-/activities/date/${today}.json`,
     { headers: { authorization: `Bearer ${accessToken}` } }
   );
   const body = await res.json();

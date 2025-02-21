@@ -6,6 +6,8 @@ Powered by Cloudflare Workers.
 
 There is an issue with the Spotify playlists feature: Workers have a connection limit of 50 and I neeed to load the follower count for each of my playlists which is causing the function to abort.
 
+To run a worker in development against the production`STATSDB`, turn off local mode using <kbd>[l]</kbd>.
+
 ## Refresh Fitbit Tokens
 
 1. Go to https://www.fitbit.com/oauth2/authorize?client_id=<FITBIT_CLIENT_ID>&response_type=code&scope=activity&redirect_uri=https://localhost:8080/api/auth/fitbit&expires_in=31536000
