@@ -11,7 +11,8 @@ export const getTraktStats = async env => {
       headers: {
         'content-type': 'application/json',
         'trakt-api-version': 2,
-        'trakt-api-key': env.TRAKT_CLIENT_ID
+        'trakt-api-key': env.TRAKT_CLIENT_ID,
+        'User-Agent': 'Dan Bovey Personal Site'
       }
     });
   } catch (error) {
