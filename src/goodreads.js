@@ -8,7 +8,7 @@ export const getReadingChallenge = async () => {
     _,
     read,
     goal
-  ] = /read (\d+) book toward their goal of (\d+) books/.exec(html);
+  ] = /read (\d+) books? toward their goal of (\d+) books?/.exec(html);
 
   const [_m, challengeId] = /user_challenges\/(\d+)/.exec(html);
 
