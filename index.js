@@ -8,16 +8,32 @@ import { getStravaRecentRides } from './src/strava';
 import { getTraktStats } from './src/trakt';
 
 const router = Router();
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type'
+};
+
 const jsonResponse = data =>
   new Response(JSON.stringify(data), {
     headers: {
-      'Access-Control-Allow-Origin': '*',
+      ...corsHeaders,
       'Content-type': 'application/json'
     }
   });
 
+// Handle CORS preflight requests
+router.options('*', () => {
+  return new Response(null, {
+    headers: corsHeaders,
+    status: 204
+  });
+});
+
 router.get('/', () => {
-  return new Response('Stats server for danbovey.uk');
+  return new Response('Stats server for danbovey.uk', {
+    headers: corsHeaders
+  });
 });
 
 router.get('/fitbit', async () => {
