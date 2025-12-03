@@ -2,10 +2,10 @@ const username = 'boveybrawlers';
 // Subrequest limit of CloudFlare Workers is 50, so we should limit to 40 playlists
 const limit = 40;
 
-const getAccessToken = async () => {
+const getAccessToken = async env => {
   const params = new URLSearchParams();
   params.append('grant_type', 'refresh_token');
-  params.append('refresh_token', SPOTIFY_REFRESH_TOKEN);
+  params.append('refresh_token', env.SPOTIFY_REFRESH_TOKEN);
 
   let res;
   try {
@@ -15,20 +15,35 @@ const getAccessToken = async () => {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
         Authorization: `Basic ${Buffer.from(
-          `${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`
+          `${env.SPOTIFY_CLIENT_ID}:${env.SPOTIFY_CLIENT_SECRET}`
         ).toString('base64')}`
       }
     });
   } catch (error) {
     console.error(error.message);
-    return;
+    throw error;
+  }
+
+  if (!res.ok) {
+    const body = await res.text();
+    throw new Error(`Spotify ${res.status}: ${body.slice(0, 200)}`);
   }
 
   return await res.json();
 };
 
-export const getSpotifyPlaylists = async () => {
-  const { access_token } = await getAccessToken();
+export const getSpotifyPlaylists = async env => {
+  if (
+    !env?.SPOTIFY_CLIENT_ID ||
+    !env?.SPOTIFY_CLIENT_SECRET ||
+    !env?.SPOTIFY_REFRESH_TOKEN
+  ) {
+    throw new Error(
+      'SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, and SPOTIFY_REFRESH_TOKEN are required'
+    );
+  }
+
+  const { access_token } = await getAccessToken(env);
 
   let res;
   try {
@@ -38,7 +53,11 @@ export const getSpotifyPlaylists = async () => {
     );
   } catch (error) {
     console.error(error.message);
-    return;
+    throw error;
+  }
+  if (!res.ok) {
+    const body = await res.text();
+    throw new Error(`Spotify ${res.status}: ${body.slice(0, 200)}`);
   }
   const body = await res.json();
 

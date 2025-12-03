@@ -36,8 +36,8 @@ router.get('/', () => {
   });
 });
 
-router.get('/fitbit', async () => {
-  const summary = await getFitbitSummary();
+router.get('/fitbit', async (_request, env) => {
+  const summary = await getFitbitSummary(env);
   return jsonResponse(summary);
 });
 
@@ -51,23 +51,23 @@ router.get('/soundcloud', async () => {
   return jsonResponse(mixCount);
 });
 
-router.get('/spotify', async () => {
-  const topPlaylists = await getSpotifyPlaylists();
+router.get('/spotify', async (_request, env) => {
+  const topPlaylists = await getSpotifyPlaylists(env);
   return jsonResponse(topPlaylists);
 });
 
-router.get('/strava', async () => {
-  const recentRides = await getStravaRecentRides();
+router.get('/strava', async (_request, env) => {
+  const recentRides = await getStravaRecentRides(env);
   return jsonResponse(recentRides);
 });
 
-router.get('/trakt', async () => {
-  const stats = await getTraktStats();
+router.get('/trakt', async (_request, env) => {
+  const stats = await getTraktStats(env);
   return jsonResponse(stats);
 });
 
 router.all('*', () => new Response('404 not found', { status: 404 }));
 
-addEventListener('fetch', e => {
-  e.respondWith(router.handle(e.request));
-});
+export default {
+  fetch: (request, env, ctx) => router.handle(request, env, ctx)
+};

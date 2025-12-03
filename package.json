@@ -13,10 +13,9 @@
   "license": "MIT",
   "devDependencies": {
     "prettier": "^1.18.2",
-    "wrangler": "^3.109.2"
+    "wrangler": "^4.51.0"
   },
   "dependencies": {
-    "fitbit-node": "^2.2.0",
     "itty-router": "^2.4.10"
   }
 }

@@ -1,3 +1,5 @@
+// Local-only environment variables for wrangler dev (see https://developers.cloudflare.com/workers/configuration/environment-variables/).
+
 FITBIT_CLIENT_ID = "xxxxx"
 FITBIT_CLIENT_SECRET = "xxxxx"
 
