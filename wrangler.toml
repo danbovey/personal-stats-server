@@ -3,14 +3,15 @@ main = "index.js"
 
 workers_dev = true
 compatibility_date = "2022-02-07"
+compatibility_flags = ["nodejs_compat_v2"]
 
 [observability.logs]
 enabled = true
 
 [[kv_namespaces]]
 binding = "STATSDB"
-preview_id = "9bb6a68d2e2546db88579aa3737e85ba"
-id = "9bb6a68d2e2546db88579aa3737e85ba"
+preview_id = "5876d1273f124553a87467536e6aebfc"
+id = "5876d1273f124553a87467536e6aebfc"
 
 # [secrets]
 # FITBIT_CLIENT_ID
